@@ -7,35 +7,28 @@
 
 function validate(node, min = null, max = null){
   if(!node) return true;
+  if(min && node.data < min) return false;
+  if(max && node.data > max) return false;
   if(!node.left && !node.right) return true;
-  console.log(node);
 
   let left = null;
   let right = null;
 
-  if(node.left){
-    if(node.left.data > node.data) {
-      left = false;
-    } else {
-      min = node.left.data;
-      left = validate(node.left, min, node.data);
-    }
-  } else {
+  if(!node.left) {
     left = true;
+  } else if(node.left.data > node.data) {
+    left = false;
+  } else {
+    left = validate(node.left, min, node.data);
   }
 
-  if(node.right){
-    if(node.data > node.right.data) right = false;
-    else {
-      max = node.right.data;
-      right = validate(node.right, min, node.data);
-    }
+  if(!node.right) {
+    right = true;
+  } else if(node.data > node.right.data) {
+    right = false;
   } else {
-    left = true;
+    right = validate(node.right, node.data, max);
   }
-
-  console.log('data:'+node.data, 'min:'+min, 'max:'+max, 'left:'+left, 'right:'+right);
-
   return left && right;
 }
 
