@@ -21,9 +21,7 @@ class Node {
   }
 
   remove(data){
-    this.children = this.children.filter(node => {
-      node.data !== data;
-    })
+    this.children = this.children.filter(node => node.data !== data)
   }
 }
 
@@ -32,12 +30,31 @@ class Tree {
     this.root = null;
   }
 
-  traverserBF(fn, node=this.root){
-    fn(node.data);
-    for(let child in node.children){
-      traverseBF(fn, node.child);
+  traverseBF(fn){
+    const arr = [this.root];
+    while(arr.length){
+      const node = arr.shift();
+      arr.push(...node.children);
+      fn(node);
     }
   }
+
+  // Traverse Breadth First with While Loop
+  traverseDF(fn){
+    const arr = [this.root];
+    while(arr.length){
+      const node = arr.shift();
+      arr.unshift(...node.children);
+      fn(node);
+    }
+  }
+  // Traverse Breadth First with Recursive
+  // traverseDF(fn, node=this.root){
+  //   fn(node);
+  //   for(let child of node.children){
+  //     this.traverseDF(fn, child);
+  //   }
+  // }
 }
 
 module.exports = { Tree, Node };
