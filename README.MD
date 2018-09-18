@@ -1,5 +1,5 @@
 # HOW TO SET UP
-1. Setup (node.js environment)[https://nodejs.org/] in your computer.
+1. Setup [node.js environment](https://nodejs.org/) in your computer.
 1. Install jest by `npm install -g jest`
 
 # HOW TO TEST YOUR code
