@@ -40,9 +40,9 @@ console.timeEnd('b');
 
 function mergeSort(arr) {
   if(arr.length < 2) return arr;
-
-  const left = arr.slice(0, Math.ceil(arr.length / 2));
-  const right = arr.slice(Math.ceil(arr.length / 2));
+  const mid = Math.ceil(arr.length / 2);
+  const left = arr.slice(0, mid);
+  const right = arr.slice(mid);
   return merge(mergeSort(left), mergeSort(right))
 }
 
