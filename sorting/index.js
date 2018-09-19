@@ -4,12 +4,12 @@
 const array = [123, -3, 8, -400, 2, 2000, -200121, 1, 0];
 
 function bubbleSort(arr) {
-  for(let i=1; i<arr.length; i++){
-    for(let j=i; j<arr.length; j++){
-      if( arr[i-1] > arr[j] ){
-        let temp = arr[j];
-        arr[j] = arr[i-1];
-        arr[i-1] = temp;
+  for(let i=0; i<arr.length-1; i++){
+    for(let j=i+1; j<arr.length; j++){
+      if( arr[i] > arr[j] ){
+        const temp = arr[j];
+        arr[j] = arr[i];
+        arr[i] = temp;
       }
     }
   }
@@ -49,17 +49,13 @@ function mergeSort(arr) {
 function merge(left, right) {
   let result = [];
   while(left.length > 0 || right.length > 0){
-    if(left[0] < right[0] || right[0] === undefined){
-      result.push(left[0]);
-      left.shift();
-    } else if(left[0] > right[0] || left[0] === undefined) {
-      result.push(right[0]);
-      right.shift();
+    if(left[0] < right[0] || right.length === 0){
+      result.push(left.shift());
+    } else if(left[0] > right[0] || left.length === 0) {
+      result.push(right.shift());
     } else if(left[0] === right[0]){
-      result.push(left[0]);
-      left.shift();
-      result.push(right[0]);
-      right.shift();
+      result.push(left.shift());
+      result.push(right.shift());
     }
   }
   return result;
@@ -69,4 +65,4 @@ console.time('c');
 console.log(mergeSort(array));
 console.timeEnd('c');
 
-module.exports = { bubbleSort, selectionSort, mergeSort };
+module.exports = { bubbleSort, selectionSort, mergeSort, merge };
